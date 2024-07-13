@@ -1,4 +1,6 @@
 #!/bin/bash
+# nocasematchの有効化
+shopt -s nocasematch
 #起動時
 echo "パスワードマネージャーへようこそ！"
 while true; do
@@ -7,7 +9,7 @@ while true; do
  read choices
 # Add Password が入力された場合
  case $choices in
-  "Add Password")
+  "add Password")
 #サービス名登録 
   while true; do
     echo "サービス名を入力してください："
@@ -39,11 +41,11 @@ while true; do
     fi
    done
 #入力完了
-  echo "$service_name:$user_name:$password" >> password_store.txt
-  echo "パスワードの追加は成功しました。"
-  ;;
+   echo "$service_name:$user_name:$password" >> password_store.txt
+   echo "パスワードの追加は成功しました。"
+ ;;
 # Get Password が入力された場合
-  "Get Password")
+  "get Password")
   echo "サービス名を入力してください："
   read service_name
   password=$(grep "^$service_name:" password_store.txt | cut -d: -f3)
@@ -57,16 +59,18 @@ while true; do
     echo "ユーザー名：$user_name"
     echo "パスワード：$password"
     fi
-    ;;
+ ;;
 # Exit が入力された場合
-  "Exit")
+  "exit")
    echo "Thank you!"
    break
-   ;;
+ ;;
 ## プログラムが終了
 # Add Password/Get Password/Exit 以外が入力された場合
    *)
    echo "入力が間違えています。Add Password/Get Password/Exit から入力してください。"
-   ;;
+ ;;
  esac
 done
+#nocasematchの無効化
+shopt -u nocasematch
