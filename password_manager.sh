@@ -12,38 +12,38 @@ while true; do
   "add Password")
 #サービス名登録 
   while true; do
-    echo "サービス名を入力してください："
-    read service_name
+   echo "サービス名を入力してください："
+   read service_name
     if [ -n "$service_name" ]; then
      break
     else
      echo "エラー：サービス名は必須です。再入力してください。"
     fi
-   done
+  done
 #ユーザー名登録
   while true; do
-    echo "ユーザー名を入力してください："
-    read user_name
+   echo "ユーザー名を入力してください："
+   read user_name
     if [ -n "$user_name" ]; then
      break
     else
      echo "エラー：ユーザー名は必須です。再入力してください。"
     fi
-   done
+  done
 #パスワード登録
   while true; do
    echo "パスワードを入力してください："
    read   -s password
-   if [ -n "$password" ]; then
+    if [ -n "$password" ]; then
      break
     else
-     echo "エラー：パスワードは必須です。再入力してください。"
-    fi
-   done
+    echo "エラー：パスワードは必須です。再入力してください。"
+   fi
+  done
 #入力完了
    echo "$service_name:$user_name:$password" >> password_store.txt
    echo "パスワードの追加は成功しました。"
- ;;
+   ;;
 # Get Password が入力された場合
   "get Password")
   echo "サービス名を入力してください："
@@ -58,18 +58,18 @@ while true; do
     echo "サービス名：$service_name"
     echo "ユーザー名：$user_name"
     echo "パスワード：$password"
-    fi
- ;;
+   fi
+   ;;
 # Exit が入力された場合
   "exit")
    echo "Thank you!"
    break
- ;;
+   ;;
 ## プログラムが終了
 # Add Password/Get Password/Exit 以外が入力された場合
    *)
    echo "入力が間違えています。Add Password/Get Password/Exit から入力してください。"
- ;;
+   ;;
  esac
 done
 #nocasematchの無効化
