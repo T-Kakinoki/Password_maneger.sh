@@ -31,7 +31,7 @@ while true; do
 #パスワード登録
   while true; do
    echo "パスワードを入力してください："
-   read  password
+   read   -s password
    if [ -n "$password" ]; then
      break
     else
