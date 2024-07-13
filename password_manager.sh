@@ -56,6 +56,9 @@ while true; do
   "get Password")
   echo "サービス名を入力してください："
   read service_name
+
+#暗号化ファイルの複合化
+  
   password=$(grep "^$service_name:" password_store.txt | cut -d: -f3)
    if [ -z "$password" ]; then
 ## サービス名が保存されていなかった場合
