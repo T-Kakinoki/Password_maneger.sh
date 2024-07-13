@@ -40,6 +40,14 @@ while true; do
     echo "エラー：パスワードは必須です。再入力してください。"
    fi
   done
+#ファイルの暗号化
+
+#入力されたパスワードの一時保存
+
+#パスワードの暗号化
+
+#平文の一時ファイルを削除
+
 #入力完了
    echo "$service_name:$user_name:$password" >> password_store.txt
    echo "パスワードの追加は成功しました。"
