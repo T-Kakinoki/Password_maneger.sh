@@ -77,6 +77,8 @@ while true; do
     echo "ユーザー名：$user_name"
     echo "パスワード：$password"
    fi
+   #複合化された一時ファイルの削除
+    rm password-store.txt
    ;;
 # Exit が入力された場合
   "exit")
