@@ -41,16 +41,24 @@ while true; do
    fi
   done
 #ファイルの暗号化
-
+while true; do   
+    echo "入力したデータの暗号化を行います。GPGキーで設定したメールアドレスを入力してください"
+    read gpg_email
+    if [ -n "$gpg_email" ]; then
+     break
+    else
+     echo "エラー。正しいメールアドレスを設定してください" 
+    fi 
+   done 
 #入力されたパスワードの一時保存
-
+   gpg -d password_store.gpg > password_store.txt 2> /dev/null
+   echo "$service_name:$user_name:$password" >> password_store.txt
 #パスワードの暗号化
-
+   gpg -r "$gpg_email" -e -o password_store.gpg password_store.txt
 #平文の一時ファイルを削除
-
+   rm password_store.txt
 #入力完了
    echo "$service_name:$user_name:$password" >> password_store.txt
-   echo "パスワードの追加は成功しました。"
    ;;
 # Get Password が入力された場合
   "get Password")
@@ -58,7 +66,8 @@ while true; do
   read service_name
 
 #暗号化ファイルの複合化
-  
+  gpg -d password_store.gpg > password_store.txt 2> /dev/null
+#パスワードの取得  
   password=$(grep "^$service_name:" password_store.txt | cut -d: -f3)
    if [ -z "$password" ]; then
 ## サービス名が保存されていなかった場合
