@@ -9,7 +9,7 @@ while true; do
  read choices
 # Add Password が入力された場合
  case $choices in
-  "add Password")
+  "add password")
 #サービス名登録 
   while true; do
    echo "サービス名を入力してください："
@@ -52,19 +52,20 @@ while true; do
    done 
 #入力されたパスワードの一時保存
    gpg -d password_store.gpg > password_store.txt 2> /dev/null
+   echo "$service_name:$user_name:$password" >> password_store.txt
 #パスワードの暗号化
    gpg -r "$gpg_email" -e -o password_store.gpg password_store.txt
 #平文の一時ファイルを削除
    rm password_store.txt
 #入力完了
-   echo "$service_name:$user_name:$password" >> password_store.txt
+   echo "パスワードの追加は成功しました。"  
    ;;
 # Get Password が入力された場合
-  "get Password")
+  "get password")
   echo "サービス名を入力してください："
   read service_name
 #暗号化ファイルの複合化
-  gpg -d password_store.gpg > password_store.txt 2> /dev/null
+  gpg -d password_store.gpg > password_store.txt 2> /dev/null  
 #パスワードの取得  
   password=$(grep "^$service_name:" password_store.txt | cut -d: -f3)
    if [ -z "$password" ]; then
@@ -78,7 +79,7 @@ while true; do
     echo "パスワード：$password"
    fi
    #複合化された一時ファイルの削除
-    rm password-store.txt
+    rm password_store.txt
    ;;
 # Exit が入力された場合
   "exit")
