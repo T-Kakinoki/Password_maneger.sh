@@ -52,7 +52,6 @@ while true; do
    done 
 #入力されたパスワードの一時保存
    gpg -d password_store.gpg > password_store.txt 2> /dev/null
-   echo "$service_name:$user_name:$password" >> password_store.txt
 #パスワードの暗号化
    gpg -r "$gpg_email" -e -o password_store.gpg password_store.txt
 #平文の一時ファイルを削除
@@ -64,7 +63,6 @@ while true; do
   "get Password")
   echo "サービス名を入力してください："
   read service_name
-
 #暗号化ファイルの複合化
   gpg -d password_store.gpg > password_store.txt 2> /dev/null
 #パスワードの取得  
@@ -85,7 +83,6 @@ while true; do
    echo "Thank you!"
    break
    ;;
-## プログラムが終了
 # Add Password/Get Password/Exit 以外が入力された場合
    *)
    echo "入力が間違えています。Add Password/Get Password/Exit から入力してください。"
