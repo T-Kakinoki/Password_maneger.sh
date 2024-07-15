@@ -54,11 +54,14 @@ while true; do
    gpg -d password_store.gpg > password_store.txt 2> /dev/null
    echo "$service_name:$user_name:$password" >> password_store.txt
 #パスワードの暗号化
-   gpg -r "$gpg_email" -e -o password_store.gpg password_store.txt
-#平文の一時ファイルを削除
-   rm password_store.txt
-#入力完了
-   echo "パスワードの追加は成功しました。"  
+   if gpg -r "$gpg_email" -e -o password_store.gpg password_store.txt; then
+#暗号化成功時
+    rm password_store.txt
+    echo "パスワードの追加は成功しました。" 
+   else
+#暗号化失敗時
+    echo "エラー：パスワードの追加に失敗しました。正しいGPGキーを設定してください。"
+   fi
    ;;
 # Get Password が入力された場合
   "get password")
