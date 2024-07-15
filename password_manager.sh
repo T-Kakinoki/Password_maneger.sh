@@ -47,7 +47,7 @@ while true; do
     if [ -n "$gpg_email" ]; then
      break
     else
-     echo "エラー。正しいメールアドレスを設定してください" 
+     echo "エラー。メールアドレスは必須です。再入力してください" 
     fi 
    done 
 #入力されたパスワードの一時保存
