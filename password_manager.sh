@@ -60,7 +60,8 @@ while true; do
     echo "パスワードの追加は成功しました。" 
    else
 #暗号化失敗時
-    echo "エラー：パスワードの追加に失敗しました。正しいGPGキーを設定してください。"
+    echo "エラー：パスワードの追加に失敗しました。正しいGPGキーを入力してください。"
+    rm password_store.txt
    fi
    ;;
 # Get Password が入力された場合
